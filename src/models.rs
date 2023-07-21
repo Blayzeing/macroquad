@@ -100,6 +100,7 @@ pub fn draw_grid(slices: u32, spacing: f32, axes_color: Color, other_color: Colo
     }
 }
 
+/// Draws a square billboard in the xz plane, where 'size' is half the length of each side
 pub fn draw_plane(center: Vec3, size: Vec2, texture: Option<&Texture2D>, color: Color) {
     let v1 = (
         (center + vec3(-size.x, 0., -size.y)).into(),
