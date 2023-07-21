@@ -656,6 +656,9 @@ impl QuadGl {
             shader_meta.images.push(texture.clone());
         }
 
+        // BLAYZE-TODO: Make this find explicitly ignore texture definitions that are in comments
+        // (i.e. change the find() call to find any _ScreenTexture that is not in a comment)
+        // (maybe even make it check for the full uniform declaration)
         let wants_screen_texture = shader
             .glsl_fragment
             .as_ref()
@@ -758,6 +761,11 @@ impl QuadGl {
             );
             ctx.buffer_update(bindings.index_buffer, BufferSource::slice(dc.indices()));
 
+            //BLAYZE-TODO: This appears to be where the binding issue is.
+            // Probably manually setting bindings 0 and 1 here is a bad idea?
+            // Maybe it's overwriting them on each successive draw call?
+            // It's only [1] that I think is screwy - but maybe we need a really
+            // basic test to see what's going on.
             bindings.images[0] = dc.texture.unwrap_or(white_texture);
             bindings.images[1] = self
                 .state
