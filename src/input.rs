@@ -62,7 +62,9 @@ pub fn mouse_position_local() -> Vec2 {
     convert_to_local(Vec2::new(pixels_x, pixels_y))
 }
 
-/// Returns the difference between the current mouse position and the mouse position on the previous frame.
+/// Returns the difference between the current mouse position and the mouse position the last time
+/// this function was called. For instance, to get the inter-frame delta you should call this
+/// function once every frame.
 pub fn mouse_delta_position() -> Vec2 {
     let context = get_context();
 
